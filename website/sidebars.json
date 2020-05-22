@@ -1,0 +1,20 @@
+{
+  "docs": {
+    "Getting Started": ["introduction", "setup"],
+    "Core Concepts": [
+      "vnodes",
+      "machines",
+      "keys",
+      "routing",
+      "performance",
+      "ssr",
+      "testing",
+      "forms"
+    ],
+    "Tutorials": ["soundcloud"],
+    "API Reference": ["cheatsheet"]
+  },
+  "docs-other": {
+    "First Category": ["doc5"]
+  }
+}
