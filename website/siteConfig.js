@@ -22,7 +22,7 @@ const users = [
 
 const siteConfig = {
   title: "Baahu", // Title for your website.
-  tagline: "Fast Mealy machine-based UI framework",
+  tagline: "Fast Moore machine-based UI framework",
   url: "https://baahu.dev", // Your website URL
   baseUrl: "/", // Base URL for your project */
   // For github.io type URLs, you would set the url and baseUrl like:

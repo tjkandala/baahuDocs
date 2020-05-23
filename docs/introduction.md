@@ -6,7 +6,7 @@ sidebar_label: Introduction/Pitch
 
 ## What is Baahu?
 
-Baahu is a zero-dependency state-machine-based SPA framework for Javascript + TypeScript
+Baahu is a zero-dependency Moore machine-based SPA framework for Javascript + TypeScript
 
 ## Features
 
