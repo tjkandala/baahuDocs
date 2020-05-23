@@ -3,6 +3,10 @@ id: setup
 title: Setup
 ---
 
+## Quick Start
+
+[Code Sandbox template](https://codesandbox.io/s/hello-baahu-2zzv7?file=/src/index.tsx)
+
 ## Bundling
 
 Most baahu apps will have a build step. Bundling gives you huge performance, and therefore UX, returns for how little work you have to put in. You _can_ use baahu with just a script tag, but you'd be missing out on JSX, typescript, and easy code-splitting.
