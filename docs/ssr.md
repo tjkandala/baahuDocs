@@ -25,4 +25,4 @@ Evidently, it _is_ possible to get extremely good performance with SSR + hydrati
 
 When you are building a blog or e-commerce site, don't use a framework like baahu. For example, these docs are made with docusaurus, not baahu.
 
-Regardless of which side of the debate you align with, you will benefit from baahus virtually [best-in-class startup metrics](/docs/performance#startup-performance-lighthouse).
+Regardless of which side of the debate you align with, you will benefit from Baahu's virtually [best-in-class startup metrics](/docs/performance#startup-performance-lighthouse).

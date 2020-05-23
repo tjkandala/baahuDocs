@@ -10,12 +10,9 @@ For unit testing your transition and effect functions, you can use a testing fra
 
 ## UI Tests
 
-For UI tests, use [DOM Testing Library](https://testing-library.com/docs/dom-testing-library/intro)
+For UI tests, use [DOM Testing Library](https://testing-library.com/docs/dom-testing-library/intro).
 
-### Example
-
-```tsx
-```
+You can test individual components by passing them to `mount` and emitting events.
 
 ## Internal Tests
 

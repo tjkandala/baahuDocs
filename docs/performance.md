@@ -6,17 +6,13 @@ author: TJ Kandala
 
 A "low-cost" framework is better for both developers (more focus on logic, not micro-management of renders) and users (bad perf == bad UX). Baahu is not optimized for benchmarks, but it maintains good runtime performance and minimal size by design.
 
-This page covers Baahus benchmark performance, its higher and lower level internal optimizations, and techniques (such as `memo`) you can use to speed up your Baahu apps.
+This page covers Baahu's benchmark performance, its higher and lower-level internal optimizations, and techniques (such as `memo`) you can use to speed up your Baahu apps.
 
 ## Benchmarks
 
-These benchmarks are (explain the krausest benchmarks). While the application being tested does not resemble a "real world" application, the benchmark gives us a statistically rigorous look at the performance characteristics of DOM libraries. Theory is great, but we must test our ideas in order to get any "real world" value from them.
+These are Baahu's results in the reputable [js-framework-benchmark](https://github.com/krausest/js-framework-benchmark). While the application being tested does not resemble a "real world" application, the benchmark gives us a statistically rigorous look at the performance characteristics of DOM libraries. Theory is great, but we must test our ideas in order to get any "real world" value from them.
 
-Be aware that these results are from my machine (2017 13" MBP, 3.1 GHz dual-core Intel Core i5 Kaby Lake), not from the benchmark creator himself. Regardless, all of the frameworks that I tested had the same (relative) performance in this run and the official results:
-
-**fastest to slowest**,
-
-vanillajs -> solid-state -> ivi -> (baahu) -> hyperapp -> svelte -> vue-next -> preact -> vue -> mithril -> react-hooks -> angular-ng -> ember -> react-mobX -> choo
+Be aware that these results are from my machine (2017 13" MBP, 3.1 GHz dual-core Intel Core i5 Kaby Lake), not from the benchmark creator himself. Regardless, all of the frameworks that I tested had the same (relative) performance in this run and the official results.
 
 ### main runtime performance benchmark (keyed)
 
@@ -28,23 +24,23 @@ vanillajs -> solid-state -> ivi -> (baahu) -> hyperapp -> svelte -> vue-next -> 
 
 ![startup performance](/img/startup.png)
 
-baahu is near best-in-class here. It has essentially the same TTI as vanillajs and svelte, and has the same script bootup time as all of the top performers.
+Baahu is near best-in-class here. It has essentially the same TTI as vanillajs and Svelte, and has the same script bootup time as all of the top performers.
 
-The category in which baahu is bested is kilobyte weight ("bundle size"). Both vanillajs and svelte are slightly smaller than baahu for this application. However, this measurement includes baahu's router, dynamic import component, and state management logic, none of which are used in this application.
+The category in which Baahu is bested is kilobyte weight ("bundle size"). Both vanillajs and Svelte are slightly smaller than baahu for this application. However, this measurement includes baahu's router, dynamic import component, and state management logic, none of which are used in this application.
 
-Also, keep in mind that a virtual DOM runtime is a fixed cost; a baahu component will grow at a slower rate than a [svelte component](https://github.com/sveltejs/svelte/issues/2546)
+Also, keep in mind that a virtual DOM runtime is a fixed cost; a Baahu component will grow at a slower rate than a [Svelte component](https://github.com/sveltejs/svelte/issues/2546)
 
 ### memory allocation
 
 ![memory allocation](/img/memory.png)
 
-Virtual DOM libraries are at a disadvantage here. See how choo, which directly traverses the DOM, fares much better in this metric. While the virtual DOM model will inevitably lead to more memory usage, baahu still does OK.
+Virtual DOM libraries are at a disadvantage here. See how Choo, which directly traverses the DOM, fares much better in this metric. While the virtual DOM model will inevitably lead to more memory usage, Baahu still does OK.
 
 Interestingly, virtual DOM libraries have lower memory overhead for components. In this benchmark, Svelte only uses [one component](https://github.com/krausest/js-framework-benchmark/blob/master/frameworks/keyed/svelte/src/Main.svelte). Read this [article](https://medium.com/better-programming/the-real-cost-of-ui-components-6d2da4aba205) for more information on the cost of the component abstraction.
 
 ## Higher-Level Internal Optimizations
 
-The main "optimization" in baahu is that only components that SHOULD re-render, re-render. At first, this sounds like this should be a property of every framework. However, this isn't possible without (potentially expensive) prop equality checks. In traditional virtual DOM frameworks, state updates are propagated by passing props down to children. Because of this . In baahu
+The main "optimization" in Baahu is that only components that SHOULD re-render, re-render. At first, this sounds like this should be a property of every framework. However, this isn't possible without (potentially expensive) prop equality checks. In traditional virtual DOM frameworks, state updates are propagated by passing props down to children. Because of this, shared state between distant leaves will result in many unnecessary rerenders of intermediate components. "Global state management" libraries help to overcome this, but only by working _around_ the framework, not with it.
 
 **This optimization is not useful in the benchmark reviewed above**, which has less complex state than TodoMVC. Regardless, it can really help [0] when sending messages between machines (i.e, global state). Here is a visual explanation of the internals:
 
@@ -54,7 +50,7 @@ The main "optimization" in baahu is that only components that SHOULD re-render, 
 
 ![rendering opts](/img/rendering-opts.svg)
 
-[0] I'm a hypocrite. I don't have any solid numbers for "global events in baahu vs. other frameworks," mostly because I haven't thought of any good apples-to-apples comparisons. Also, there is the major confounding variable of performance of the DOM manipulation layer (baahu vs. react-redux would test react more than redux). In this case, we can rely on our intuition that "doing less work is good"; a component will only rerender if it reacted to an event!
+[0] I'm a hypocrite. I don't have any solid numbers for "global events in Baahu vs. other frameworks," mostly because I haven't thought of any good apples-to-apples comparisons. Also, there is the major confounding variable of performance of the DOM manipulation layer (Baahu vs. react-redux would test react more than redux). In this case, we can rely on our intuition that "doing less work is good"; a component will only rerender if it reacted to an event!
 
 ## Lower-Level Internal Optimizations
 

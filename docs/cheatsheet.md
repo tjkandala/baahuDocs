@@ -123,8 +123,17 @@ Use `machine` to create a Machine Component.
 ```tsx
 import { machine } from "baahu";
 
-const MinimalMachine = machine({
-  id: "minimal",
+const Toggle = machine({
+  id: "toggle",
+  initial: "inactive",
+  context: () => ({}),
+  when: {
+    inactive: {
+      on: { TOGGLE: { to: "active" } },
+    },
+    active: { on: { TOGGLE: { to: "inactive" } } },
+  },
+  render: (state) => <p>{state}</p>,
 });
 ```
 
@@ -133,6 +142,26 @@ const MinimalMachine = machine({
 `id` is the identifier of a machine. When baahu is rendering and finds a machine component, it checks, by id, whether an instance of this component is in the "machine registry" (internal map of machine instances).
 
 Fixed string ids work for "singleton" machines; machines that you know will only have one instance on the page.
+
+```tsx
+import { machine } from "baahu";
+
+const MinimalMachine = machine({
+  id: "minimal",
+  //  rest of component
+});
+```
+
+For dynamic machines, derive the id from props:
+
+```tsx
+import { machine } from "baahu";
+
+const MinimalMachine = machine({
+  id: (props) => `minimal-${props.id}`,
+  //  rest of component
+});
+```
 
 ## Events
 
@@ -162,4 +191,141 @@ emit({ type: "TOGGLE", name: "Baahu" });
 
 Baahu will check every machine in the registry to see if it listens to this event. Do not fear global events; Baahu only reenders the components that listened to the event.
 
-## TypeScript
+### State
+
+#### Initial State
+
+```tsx
+import { machine } from "baahu";
+
+const MinimalMachine = machine({
+  initial: "inactive",
+  //  rest of component
+});
+```
+
+Specify the intial state with the `initial` property.
+
+```tsx
+import { machine } from "baahu";
+
+const MinimalMachine = machine({
+  initial: (props) => props.initial,
+  //  rest of component
+});
+```
+
+You can also derive initial state from props/within a function.
+
+#### Initial Context
+
+```tsx
+import { machine } from "baahu";
+
+const MinimalMachine = machine({
+  context: (props) => ({}),
+  //  rest of component
+});
+```
+
+The initial context the return value of the `context` method.
+
+### When
+
+The `when` property of a machine component defines which events the machine listens to depending on which state it is in, and how the machine behaves on those events.
+
+The following machine is intentionally verbose in order to demonstrate all of the optional properties of a baahu machine.
+
+```tsx
+import { machine } from "baahu";
+
+const EvenOdd = machine({
+  when: {
+    /** name of state */
+    even: {
+      /** entry/exit actions */
+      entry: () => console.log("entered even state"),
+      exit: (ctx, e) => console.log("exited even state"),
+      on: {
+        /** event types */
+        BECOME_ODD: {
+          /** target state */
+          to: "odd",
+          /** 'do' actions */
+          do: (ctx, e) => console.log("do function"),
+          /** 'if' condition */
+          if: (ctx, e) => true,
+        },
+      },
+    },
+    odd: {
+      /** entry/exit actions */
+      entry: () => console.log("entered odd state"),
+      exit: () => console.log("exited odd state"),
+      on: {
+        /** event types */
+        BECOME_EVEN: {
+          /** target state */
+          to: (ctx, e) => "even",
+          /** 'do' actions */
+          do: [
+            (ctx, e) => console.log("do array"),
+            (ctx, e) => console.log("do array"),
+          ],
+          /** 'if' condition */
+          if: (ctx, e) => true,
+        },
+      },
+    },
+  },
+  //  rest of component
+});
+```
+
+The properties of the `when` object are the names of the states that the machine can be in.
+
+The state can have up to three (**optional**) properties:
+
+- **entry**: Function called with context + event when the machine **enters** this state.
+
+- **exit**: Function called with context + event when the machine **exits** this state.
+
+- **on**: On object that defines event listeners. Its keys are the event`type`s that the machine listens to, and each key's value is the event listener specification.
+
+An event listener specification can have up to three (**optional**) properties
+
+- **to**: The target state. This can be a string, or a function that returns a string (called with context + state)
+
+- **do**: Perform side-effects, such as mutating context. This can be a function, or an array of functions. `do` functions are called with context + event.
+
+- **if**: Function that determines whether to execute the transition and/or `do` actions. Called with context + event, returns boolean. If the event listener does not have an `if` function, it will always execute the transition and/or `do` actions
+
+When an instance of this machine component is in the `even` state, it listens to the `BECOME_ODD` event. On that event, Baahu will check if the event listener has an `if` property. It does, so Baahu will call the function with the machine instance's context + event. The `if` function returns true, so it execute its `do` action and transition to the `odd` state. As a result of the transition, baahu will execute `even`s `exit` action, and `odd`s `entry` action.
+
+Remember, machines don't _have_ to transition to other states on actions; they can simply perform side effects with `do` function(s)!
+
+### Mutating Context
+
+Example:
+
+```tsx
+import { b, machine, emit } from "baahu";
+
+const Counter = machine({
+  id: "counter",
+  initial: "default",
+  context: () => ({
+    count: 0,
+  }),
+  when: {
+    default: {
+      on: {
+        INCREMENT: {
+          do: (ctx, e) => ctx.count++,
+        },
+      },
+    },
+  },
+  render: (_state, ctx) => <p>Count {ctx.count}</p>,
+});
+```

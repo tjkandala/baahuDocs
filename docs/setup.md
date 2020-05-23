@@ -9,10 +9,6 @@ Most baahu apps will have a build step. Bundling gives you huge performance, and
 
 Parcel is used in this guide because it is quicker to set up, but any bundler will do the job.
 
-You can also use the official baahu rollup template:
-
-A baahu CLI is in development; once it is complete, it will become the recommended bundler/environment for baahu apps.
-
 ## Language
 
 TypeScript is the recommended language to get the 'full baahu experience.' For example, TypeScript will not compile your code if you forget to handle all the states that a machine could be in. You can also get full autocomplete for both machine logic and JSX.
@@ -103,4 +99,4 @@ const App = () => <p>App</p>;
 mount(App, document.body);
 ```
 
-First argument of `mount` is the root component of your app. The second argument is the DOM node you want to append your app to.
+The first argument of `mount` is the root component of your app. The second argument is the DOM node you want to append your app to.

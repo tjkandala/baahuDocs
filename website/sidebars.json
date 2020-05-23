@@ -13,8 +13,5 @@
     ],
     "Tutorials": ["soundcloud"],
     "API Reference": ["cheatsheet"]
-  },
-  "docs-other": {
-    "First Category": ["doc5"]
   }
 }

@@ -180,14 +180,16 @@ const GamesRouter = router(
 
 ## Code-Splitting
 
-Using `bLazy`, we can [dynamically import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import#Dynamic_Imports) components. Because routes return components, you can easily code-split at the route level. In a large application, you should code-split at component and route level.
+Using `lazy`, we can [dynamically import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import#Dynamic_Imports) components. Because routes return components, you can easily code-split at the route level. In a large application, you should code-split at component and route level.
 
 ```ts
+import { lazy } from "baahu";
+
 // file `./LazyComp`'s default export is a baahu component!
-const MyLazyComp = bLazy(() => import("./LazyComp"));
+const MyLazyComp = lazy(() => import("./LazyComp"));
 ```
 
-bLazy takes up to 4 arguments:
+`lazy` takes up to 4 arguments:
 
 1. lazyComponent: This is a function that returns a promise that resolves to an object. The .default property of that object must be a baahu component.
 
@@ -233,7 +235,7 @@ export default LazyRouter;
 `RootRouter.tsx`
 
 ```tsx
-const LazyRouter = bLazy(() => import("./LazyRouter"), <p>loading...</p>);
+const LazyRouter = lazy(() => import("./LazyRouter"), <p>loading...</p>);
 
 const RootRouter = router({
   "/": () => <p>you are home</p>,
@@ -244,13 +246,13 @@ const RootRouter = router({
 
 #### Limitations
 
-`bLazy` is fairly naive. It is suitable for importing singleton-like components, like "route" components, or "container" components (like a calendar component). If you use multiple instances of the same bLazy component, it will only render the first one.
+`lazy` is fairly naive. It is suitable for importing singleton-like components, like "route" components, or "container" components (like a calendar component). If you use multiple instances of the same `lazy` component, it will only render the first one.
 
-As long as you don't use `bLazy` to import components like a reusable button (these can be encapsulated by the route/container component), you will be fine. As you can see from the "nested lazy router" pattern, `bLazy` is still powerful.
+As long as you don't use `lazy` to import components like a reusable button (these can be encapsulated by the route/container component), you will be fine. As you can see from the "nested lazy router" pattern, `lazy` is still powerful.
 
 ## Internals
 
-baahu routers use zero regular expressions. Instead, they are powered by the RouTrie (Router + Trie) class.
+Baahu routers use zero regular expressions. Instead, they are powered by the RouTrie (Router + Trie) class.
 
 Compared to a [radix tree](https://en.wikipedia.org/wiki/Radix_tree), RouTrie trades a little bit of memory in order to reduce map lookups.
 
@@ -258,6 +260,6 @@ You can read the implementation [here](https://github.com/tjkandala/baahu/blob/m
 
 ### Prior Art
 
-There are a few JS SPA routers similar to baahus RouTrie, but RouTrie outperforms them because its implementation is more optimizable by JS engines.
+There are a few JS SPA routers similar to Baahu's RouTrie, but RouTrie outperforms them because its implementation is more optimizable by JS engines.
 
 The trie-based internals are inspired by the elegant [nanorouter in choojs](https://github.com/choojs/nanorouter).

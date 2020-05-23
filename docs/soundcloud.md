@@ -70,7 +70,7 @@ There are two distinct features on this page
 
 We will create two machines for this page: "big player" machine and "comment input" machine.
 
-For the sake of the tutorial, the "big player" machine will be almost identical to the "search result" machine. In a true SoundCloud clone, you would implement a waveform timeline; its associated challenges are out of scope for a baahu tutorial.
+For the sake of the tutorial, the "big player" machine will be almost identical to the "search result" machine. In a true SoundCloud clone, you would implement a waveform timeline; its associated challenges are out of scope for a Baahu tutorial.
 
 Let's model the comment input machine:
 

@@ -22,7 +22,7 @@ const users = [
 
 const siteConfig = {
   title: "Baahu", // Title for your website.
-  tagline: "state-machine-based SPA framework",
+  tagline: "Fast Mealy machine-based UI framework",
   url: "https://baahu.dev", // Your website URL
   baseUrl: "/", // Base URL for your project */
   // For github.io type URLs, you would set the url and baseUrl like:
@@ -40,7 +40,7 @@ const siteConfig = {
   headerLinks: [
     { doc: "introduction", label: "Docs" },
     { doc: "cheatsheet", label: "API" },
-    { page: "help", label: "Help" },
+    { href: "https://github.com/tjkandala/baahu", label: "Github" },
     { blog: true, label: "Blog" },
   ],
 
@@ -48,13 +48,13 @@ const siteConfig = {
   users,
 
   /* path to images for header/footer */
-  headerIcon: "img/favicon.ico",
-  footerIcon: "img/favicon.ico",
-  favicon: "img/favicon.ico",
+  headerIcon: "img/baahu_ele.png",
+  footerIcon: "img/baahu_ele.png",
+  favicon: "img/baahu_ele.png",
 
   /* Colors for website */
   colors: {
-    primaryColor: "#086885",
+    primaryColor: "#404E4D",
     secondaryColor: "#05485d",
   },
 
@@ -73,7 +73,7 @@ const siteConfig = {
   */
 
   // This copyright info is used in /core/Footer.js and blog RSS/Atom feeds.
-  copyright: `Copyright © ${new Date().getFullYear()} Your Name or Your Company Name`,
+  copyright: `Copyright © ${new Date().getFullYear()} TJ Kandala`,
 
   highlight: {
     // Highlight.js theme to use for syntax highlighting in code blocks.
@@ -89,8 +89,8 @@ const siteConfig = {
   cleanUrl: true,
 
   // Open Graph and Twitter card images.
-  ogImage: "img/undraw_online.svg",
-  twitterImage: "img/undraw_tweetstorm.svg",
+  ogImage: "img/baahu_ele.png",
+  twitterImage: "img/baahu_ele.png",
 
   // For sites with a sizable amount of content, set collapsible to true.
   // Expand/collapse the links and subcategories under categories.
@@ -104,7 +104,7 @@ const siteConfig = {
 
   // You may provide arbitrary config keys to be used as needed by your
   // template. For example, if you need your repo's URL...
-  //   repoUrl: 'https://github.com/facebook/test-site',
+  repoUrl: "https://github.com/tjkandala/baahu",
 };
 
 module.exports = siteConfig;
