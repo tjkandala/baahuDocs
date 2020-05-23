@@ -23,9 +23,9 @@ Baahu is a zero-dependency state-machine-based SPA framework for Javascript + Ty
 
 ## Tradeoffs/Anti-Pitch
 
-baahu is able to maintain its size and performance while including batteries because it is not a flexible view library or reactive framework. The built-in features, such as routing, state management, and dynamically imported components, are deeply coupled to baahu's internal architecture. A framework like react lends itself to boundless composition. Userland routing and global state management libraries can be implemented a little more elegantly in React than in baahu.
+- API is slightly more restrictive compared to larger libraries. For instance, components cannot return arrays (single child only).
 
-- API is slightly more restrictive compared to larger libraries. For instance, components cannot return arrays (single child only)
+- The built-in features, such as routing, state management, and dynamically imported components, are coupled to baahu's internal architecture. They cannot be tree-shaken away.
 
 ## Why was baahu created?
 
