@@ -27,7 +27,7 @@ const Toggle = machine({
 
 ## High-level overview
 
-Baahu machine components are loosely based on More machines; ["a finite-state machine whose output values are determined only by its current state"](https://en.wikipedia.org/wiki/Moore_machine). The render function is roughly equivalent to the output function of a Moore machine.
+Baahu machine components are loosely based on Moore machines; ["a finite-state machine whose output values are determined only by its current state"](https://en.wikipedia.org/wiki/Moore_machine). The render function is roughly equivalent to the output function of a Moore machine.
 
 The [message-passing semantics](https://en.wikipedia.org/wiki/Message_passing) are inspired by the actor model. The second argument of `emit` is the "mailing address" (`id` of the machine instance) of the machine you want to send the message to. If you omit the target, the event becomes a global event.
 
