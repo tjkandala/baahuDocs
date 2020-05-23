@@ -31,4 +31,4 @@ Baahu is a zero-dependency Moore machine-based SPA framework for Javascript + Ty
 
 The purpose of baahu is to make complex UI easier to implement through explicit state machines, without sacrificing end user experience (bundle-size + performance).
 
-[Read more](/blog/2020-05-17-why-baahu.md)
+[Read more](https://baahu.dev/blog/2020/05/17/why-baahu)
