@@ -50,6 +50,8 @@ The main "optimization" in Baahu is that only components that SHOULD re-render, 
 
 ![rendering opts](/img/rendering-opts.svg)
 
+[Targeted events](/machines#targeted) are O(1); no matter how big your component tree is, rendering a component takes the same amount of time because children don't have to rerender. Global events introduce the overhead of native sorting ([Timsort in v8](http://v8.dev/blog/array-sort)), but that is negligible compared to the cost of rendering components that haven't changed.
+
 [0] I'm a hypocrite. I don't have any solid numbers for "global events in Baahu vs. other frameworks," mostly because I haven't thought of any good apples-to-apples comparisons. Also, there is the major confounding variable of performance of the DOM manipulation layer (Baahu vs. React-Redux would test React more than Redux). In this case, we can rely on our intuition that "doing less work is good"; a component will only rerender if it reacted to an event!
 
 ## Lower-Level Internal Optimizations
