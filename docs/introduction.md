@@ -10,7 +10,7 @@ Baahu is a zero-dependency Moore machine-based SPA framework for Javascript + Ty
 
 ## Features
 
-- [Faster and smaller than major frameworks/libraries](https://baahu.dev/docs/performance.md) (Svelte, Preact, Vue, React, and Angular)
+- [Faster and smaller than major frameworks/libraries](https://baahu.dev/docs/performance) (Svelte, Preact, Vue, React, and Angular)
 - Built-in robust state management: Finite State Machines!
 - Event-driven, not change-driven/reactive
 - Built-in trie-based router & code-splitting
