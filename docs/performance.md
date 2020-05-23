@@ -50,7 +50,7 @@ The main "optimization" in Baahu is that only components that SHOULD re-render, 
 
 ![rendering opts](/img/rendering-opts.svg)
 
-[0] I'm a hypocrite. I don't have any solid numbers for "global events in Baahu vs. other frameworks," mostly because I haven't thought of any good apples-to-apples comparisons. Also, there is the major confounding variable of performance of the DOM manipulation layer (Baahu vs. react-redux would test react more than redux). In this case, we can rely on our intuition that "doing less work is good"; a component will only rerender if it reacted to an event!
+[0] I'm a hypocrite. I don't have any solid numbers for "global events in Baahu vs. other frameworks," mostly because I haven't thought of any good apples-to-apples comparisons. Also, there is the major confounding variable of performance of the DOM manipulation layer (Baahu vs. React-Redux would test React more than Redux). In this case, we can rely on our intuition that "doing less work is good"; a component will only rerender if it reacted to an event!
 
 ## Lower-Level Internal Optimizations
 
@@ -88,7 +88,7 @@ const MemoItem = memo(Item)
 <MemoItem name="chair" price={123} />
 ```
 
-You should be aware that `memo` performs a shallow comparison of props. This is the only part of baahu that holds any opinion on mutability vs. immutability. You can mutate anything else to your hearts content (w/ performance benefits!) becuase machines rerender based on _events_, not referential inequality.
+You should be aware that `memo` performs a shallow comparison of props. This is the only part of baahu that holds any opinion on mutability vs. immutability. You can mutate anything else to your hearts content (w/ performance benefits!) because machines rerender based on _events_, not referential inequality.
 
 ### Don't _always_ use `memo`
 
