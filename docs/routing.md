@@ -152,6 +152,18 @@ const MyRouter = router<{ name: string }>({
 
 You will probably pass render props to routers more often than children, but it is good to have to option if needed.
 
+## Updating Component on Route Change
+
+If you have a component that should update on route change, listen to the `NEW_ROUTE` event. It has a `location` property with this shape:
+
+```ts
+interface location {
+      pathname: string, // location.pathname
+      search: string, // location.search,
+      state: string, // history.state,
+},
+```
+
 ## Nested Routers
 
 Wildcards aren't only useful as a fallback. You can use them to create nested routers:
