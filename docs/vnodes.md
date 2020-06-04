@@ -5,7 +5,7 @@ title: VNodes and SFCs
 
 ## VNodes
 
-Virtual DOM nodes, or VNodes for short, are JavaScript objects that represent [DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model) nodes. UIs in baahu are trees of VNodes. When a machine (component) reacts to an event, it renders a new tree of VNodes. This new tree is compared to the old tree, and any differences between the trees are applied to the DOM.
+Virtual DOM nodes, or VNodes for short, are JavaScript objects that represent [DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model) nodes. UIs in baahu are represented by trees of VNodes. When a machine (component) reacts to an event, it renders a new tree of VNodes. This new tree is compared to the old tree, and any differences between the trees are applied to the DOM.
 
 ### Creating VNodes
 
