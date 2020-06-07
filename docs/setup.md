@@ -103,4 +103,4 @@ const App = () => <p>App</p>;
 mount(App, document.body);
 ```
 
-The first argument of `mount` is the root component of your app. The second argument is the DOM node you want to append your app to.
+The first argument of `mount` is the root component of your app. The second argument is the DOM node you want to append your root component to.
